@@ -6,7 +6,7 @@
 	<version>3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>parent</name>
+	<name>Parent</name>
 	<description>Parent POM</description>
 	<url>${url}</url>
 
