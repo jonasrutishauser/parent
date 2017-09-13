@@ -9,4 +9,4 @@ The [parent Maven POM](https://jonasrutishauser.github.io/parent/snapshot) for m
 ## Releasing
 
 * Execute `mvn -B release:clean release:prepare release:perform`
-* Deploy site `(cd target/checkout; mvn site-deploy)`
+* Deploy site `(cd target/checkout; mvn -P release site-deploy)`
