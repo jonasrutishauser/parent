@@ -1,4 +1,5 @@
-# parent
+# Parent Maven POM
+
 The [parent Maven POM](https://jonasrutishauser.github.io/parent/snapshot) for my github projects.
 
 [![GNU Lesser General Public License, Version 3, 29 June 2007](https://img.shields.io/github/license/jonasrutishauser/parent.svg?label=License)](http://www.gnu.org/licenses/lgpl-3.0.txt)
