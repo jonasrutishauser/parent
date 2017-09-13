@@ -45,6 +45,14 @@
 	</ciManagement>
 
 	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
 		<site>
 			<id>github</id>
 			<url>${distributionManagement.site.url}</url>
@@ -65,7 +73,7 @@
 		<scm.developerConnection>scm:git:ssh://git@github.com/jonasrutishauser/${project.artifactId}.git</scm.developerConnection>
 		<scm.url>https://github.com/jonasrutishauser/${project.artifactId}</scm.url>
 		<distributionManagement.site.url>https://jonasrutishauser.github.io/${project.artifactId}/${site.path}</distributionManagement.site.url>
-		<url>https://github.com/jonasrutishauser/${project.artifactId}</url>
+		<url>${distributionManagement.site.url}</url>
 
 		<plugin.assembly.version>3.1.0</plugin.assembly.version>
 		<plugin.changes.version>2.12.1</plugin.changes.version>
@@ -168,16 +176,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
 				<executions>
@@ -275,6 +273,11 @@
 				<plugin>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>${plugin.release.version}</version>
+					<configuration>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<useReleaseProfile>false</useReleaseProfile>
+						<releaseProfiles>release</releaseProfiles>
+					</configuration>
 				</plugin>
 				<plugin>
 					<artifactId>maven-dependency-plugin</artifactId>
@@ -441,15 +444,22 @@
 
 	<profiles>
 		<profile>
-			<id>release-sign-artifacts</id>
-			<activation>
-				<property>
-					<name>performRelease</name>
-					<value>true</value>
-				</property>
-			</activation>
+			<id>release</id>
+			<properties>
+				<site.path>${project.version}</site.path>
+			</properties>
 			<build>
 				<plugins>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<artifactId>maven-gpg-plugin</artifactId>
 						<executions>
@@ -462,18 +472,6 @@
 					</plugin>
 				</plugins>
 			</build>
-		</profile>
-		<profile>
-			<id>release-site-path</id>
-			<activation>
-				<property>
-					<name>performRelease</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<properties>
-				<site.path>${project.version}</site.path>
-			</properties>
 		</profile>
 	</profiles>
 </project>
