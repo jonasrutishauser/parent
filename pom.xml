@@ -79,7 +79,7 @@
 		<plugin.changelog.version>2.3</plugin.changelog.version>
 		<plugin.clean.version>3.0.0</plugin.clean.version>
 		<plugin.compiler.version>3.7.0</plugin.compiler.version>
-		<plugin.dependency.version>3.0.1</plugin.dependency.version>
+		<plugin.dependency.version>3.0.2</plugin.dependency.version>
 		<plugin.deploy.version>2.8.2</plugin.deploy.version>
 		<plugin.enforcer.version>1.4.1</plugin.enforcer.version>
 		<plugin.github-site.version>0.12</plugin.github-site.version>
@@ -95,7 +95,7 @@
 		<plugin.resources.version>3.0.2</plugin.resources.version>
 		<plugin.site.version>3.6</plugin.site.version>
 		<plugin.source.version>3.0.1</plugin.source.version>
-		<plugin.surefire.version>2.20</plugin.surefire.version>
+		<plugin.surefire.version>2.20.1</plugin.surefire.version>
 		<plugin.taglist.version>2.4</plugin.taglist.version>
 		<plugin.versions.version>2.4</plugin.versions.version>
 	</properties>
@@ -350,6 +350,9 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-report-plugin</artifactId>
+				<configuration>
+					<alwaysGenerateSurefireReport>false</alwaysGenerateSurefireReport>
+				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-jxr-plugin</artifactId>
