@@ -9,4 +9,3 @@ The [parent Maven POM](https://jonasrutishauser.github.io/parent/) for my github
 ## Releasing
 
 * Execute `mvn -B release:clean release:prepare release:perform`
-* Deploy site `(cd target/checkout; mvn -P release site-deploy)`

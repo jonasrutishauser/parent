@@ -65,13 +65,13 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 
-		<site.path>snapshot</site.path>
+		<site.path>snapshot/</site.path>
 
 		<!-- properties due to MNG-3244 -->
 		<scm.connection>scm:git:https://github.com/jonasrutishauser/${project.artifactId}.git</scm.connection>
 		<scm.developerConnection>scm:git:ssh://git@github.com/jonasrutishauser/${project.artifactId}.git</scm.developerConnection>
 		<scm.url>https://github.com/jonasrutishauser/${project.artifactId}</scm.url>
-		<distributionManagement.site.url>https://jonasrutishauser.github.io/${project.artifactId}/${site.path}</distributionManagement.site.url>
+		<distributionManagement.site.url>git:https://github.com/jonasrutishauser/${project.artifactId}.git!gh-pages!/${site.path}</distributionManagement.site.url>
 		<url>${distributionManagement.site.url}</url>
 
 		<plugin.assembly.version>3.1.0</plugin.assembly.version>
@@ -82,7 +82,6 @@
 		<plugin.dependency.version>3.0.2</plugin.dependency.version>
 		<plugin.deploy.version>2.8.2</plugin.deploy.version>
 		<plugin.enforcer.version>1.4.1</plugin.enforcer.version>
-		<plugin.github-site.version>0.12</plugin.github-site.version>
 		<plugin.gpg.version>1.6</plugin.gpg.version>
 		<plugin.install.version>2.5.2</plugin.install.version>
 		<plugin.jacoco.version>0.7.9</plugin.jacoco.version>
@@ -98,6 +97,7 @@
 		<plugin.surefire.version>2.20.1</plugin.surefire.version>
 		<plugin.taglist.version>2.4</plugin.taglist.version>
 		<plugin.versions.version>2.4</plugin.versions.version>
+		<wagon.git.version>1.0.0</wagon.git.version>
 	</properties>
 
 	<build>
@@ -175,24 +175,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>com.github.github</groupId>
-				<artifactId>site-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>site-deploy</phase>
-						<goals>
-							<goal>site</goal>
-						</goals>
-						<configuration>
-							<message>Building site for ${project.artifactId} (${project.version})</message>
-							<merge>true</merge>
-							<server>github</server>
-							<path>${site.path}</path>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
 				<executions>
 					<execution>
@@ -265,9 +247,13 @@
 				<plugin>
 					<artifactId>maven-site-plugin</artifactId>
 					<version>${plugin.site.version}</version>
-					<configuration>
-						<skipDeploy>true</skipDeploy>
-					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>com.github.jonasrutishauser.maven.wagon</groupId>
+							<artifactId>wagon-git</artifactId>
+							<version>${wagon.git.version}</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 				<plugin>
 					<artifactId>maven-release-plugin</artifactId>
@@ -276,7 +262,6 @@
 						<autoVersionSubmodules>true</autoVersionSubmodules>
 						<useReleaseProfile>false</useReleaseProfile>
 						<releaseProfiles>release</releaseProfiles>
-						<goals>deploy</goals>
 						<tagNameFormat>v@{project.version}</tagNameFormat>
 					</configuration>
 				</plugin>
@@ -330,11 +315,6 @@
 				<plugin>
 					<artifactId>maven-gpg-plugin</artifactId>
 					<version>${plugin.gpg.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>com.github.github</groupId>
-					<artifactId>site-maven-plugin</artifactId>
-					<version>${plugin.github-site.version}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
