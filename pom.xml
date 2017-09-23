@@ -406,7 +406,6 @@
 						<configuration>
 							<includeOpenIssues>false</includeOpenIssues>
 							<runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
-							<githubAPIServerId>none</githubAPIServerId>
 						</configuration>
 					</reportSet>
 				</reportSets>
