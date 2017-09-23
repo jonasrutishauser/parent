@@ -430,7 +430,7 @@
 		<profile>
 			<id>release</id>
 			<properties>
-				<site.path>${project.version}</site.path>
+				<site.path>${project.version}/</site.path>
 			</properties>
 			<build>
 				<plugins>
