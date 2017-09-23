@@ -72,7 +72,7 @@
 		<scm.developerConnection>scm:git:ssh://git@github.com/jonasrutishauser/${project.artifactId}.git</scm.developerConnection>
 		<scm.url>https://github.com/jonasrutishauser/${project.artifactId}</scm.url>
 		<distributionManagement.site.url>git:https://github.com/jonasrutishauser/${project.artifactId}.git!gh-pages!/${site.path}</distributionManagement.site.url>
-		<url>${distributionManagement.site.url}</url>
+		<url>https://jonasrutishauser.github.io/${project.artifactId}/${site.path}</url>
 
 		<plugin.assembly.version>3.1.0</plugin.assembly.version>
 		<plugin.changes.version>2.12.1</plugin.changes.version>
