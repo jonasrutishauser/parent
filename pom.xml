@@ -29,7 +29,7 @@
 	<scm>
 		<connection>${scm.connection}</connection>
 		<developerConnection>${scm.developerConnection}</developerConnection>
-		<url>${scm.url}</url>
+		<url>${scm_url}</url>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -71,33 +71,33 @@
 		<root.artifactId>${project.artifactId}</root.artifactId>
 		<scm.connection>scm:git:https://github.com/jonasrutishauser/${root.artifactId}.git</scm.connection>
 		<scm.developerConnection>scm:git:ssh://git@github.com/jonasrutishauser/${root.artifactId}.git</scm.developerConnection>
-		<scm.url>https://github.com/jonasrutishauser/${root.artifactId}</scm.url>
+		<scm_url>https://github.com/jonasrutishauser/${root.artifactId}</scm_url>
 		<distributionManagement.site.url>git://${root.artifactId}/https://github.com/jonasrutishauser/${root.artifactId}.git!gh-pages!${site.path}</distributionManagement.site.url>
 		<url>https://jonasrutishauser.github.io/${root.artifactId}${site.path}</url>
 
-		<plugin.assembly.version>3.1.1</plugin.assembly.version>
+		<plugin.assembly.version>3.3.0</plugin.assembly.version>
 		<plugin.changes.version>2.12.1</plugin.changes.version>
 		<plugin.changelog.version>2.3</plugin.changelog.version>
 		<plugin.clean.version>3.1.0</plugin.clean.version>
 		<plugin.compiler.version>3.8.1</plugin.compiler.version>
-		<plugin.dependency.version>3.1.1</plugin.dependency.version>
+		<plugin.dependency.version>3.1.2</plugin.dependency.version>
 		<plugin.deploy.version>2.8.2</plugin.deploy.version>
 		<plugin.enforcer.version>1.4.1</plugin.enforcer.version>
 		<plugin.gpg.version>1.6</plugin.gpg.version>
 		<plugin.install.version>2.5.2</plugin.install.version>
-		<plugin.jacoco.version>0.8.4</plugin.jacoco.version>
-		<plugin.jar.version>3.1.2</plugin.jar.version>
-		<plugin.javadoc.version>3.1.1</plugin.javadoc.version>
+		<plugin.jacoco.version>0.8.6</plugin.jacoco.version>
+		<plugin.jar.version>3.2.0</plugin.jar.version>
+		<plugin.javadoc.version>3.2.0</plugin.javadoc.version>
 		<plugin.jxr.version>3.0.0</plugin.jxr.version>
 		<plugin.plugin.version>3.6.0</plugin.plugin.version>
-		<plugin.project-info-reports.version>3.0.0</plugin.project-info-reports.version>
+		<plugin.project-info-reports.version>3.1.1</plugin.project-info-reports.version>
 		<plugin.release.version>2.5.3</plugin.release.version>
-		<plugin.resources.version>3.1.0</plugin.resources.version>
-		<plugin.site.version>3.8.2</plugin.site.version>
-		<plugin.source.version>3.1.0</plugin.source.version>
-		<plugin.surefire.version>2.22.0</plugin.surefire.version>
+		<plugin.resources.version>3.2.0</plugin.resources.version>
+		<plugin.site.version>3.9.1</plugin.site.version>
+		<plugin.source.version>3.2.1</plugin.source.version>
+		<plugin.surefire.version>2.22.2</plugin.surefire.version>
 		<plugin.taglist.version>2.4</plugin.taglist.version>
-		<plugin.versions.version>2.7</plugin.versions.version>
+		<plugin.versions.version>2.8.1</plugin.versions.version>
 		<wagon.git.version>1.1.0</wagon.git.version>
 	</properties>
 
@@ -134,7 +134,7 @@
 									<banRelease>true</banRelease>
 								</requirePluginVersions>
 								<requireMavenVersion>
-									<version>3.0.5</version>
+									<version>3.3.9</version>
 								</requireMavenVersion>
 								<requireProperty>
 									<property>project.description</property>
