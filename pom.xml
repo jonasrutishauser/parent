@@ -70,8 +70,9 @@
 		<!-- properties due to MNG-3244 -->
 		<root.artifactId>${project.artifactId}</root.artifactId>
 		<scm.connection>scm:git:https://github.com/jonasrutishauser/${root.artifactId}.git</scm.connection>
-		<scm.developerConnection>scm:git:ssh://git@github.com/jonasrutishauser/${root.artifactId}.git</scm.developerConnection>
+		<scm.developerConnection>scm:git:https://github.com/jonasrutishauser/${root.artifactId}.git</scm.developerConnection>
 		<scm_url>https://github.com/jonasrutishauser/${root.artifactId}</scm_url>
+		<project.scm.id>github</project.scm.id>
 		<distributionManagement.site.url>git://${root.artifactId}/https://github.com/jonasrutishauser/${root.artifactId}.git!gh-pages!${site.path}</distributionManagement.site.url>
 		<url>https://jonasrutishauser.github.io/${root.artifactId}${site.path}</url>
 
@@ -316,6 +317,13 @@
 				<plugin>
 					<artifactId>maven-gpg-plugin</artifactId>
 					<version>${plugin.gpg.version}</version>
+					<configuration>
+						<!-- Prevent gpg from using pinentry programs -->
+						<gpgArguments>
+							<arg>--pinentry-mode</arg>
+							<arg>loopback</arg>
+						</gpgArguments>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
