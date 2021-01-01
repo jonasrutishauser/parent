@@ -17,7 +17,7 @@ jobs:
           - 1.8
           - 11
     steps:
-      - uses: ./github/actions/maven-ci
+      - uses: ./.github/actions/maven-ci
         with:
           java-version: ${{ matrix.java }}
           coverage: false
