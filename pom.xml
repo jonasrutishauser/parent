@@ -39,8 +39,8 @@
 	</issueManagement>
 
 	<ciManagement>
-		<system>travis</system>
-		<url>https://travis-ci.org/jonasrutishauser/${root.artifactId}</url>
+		<system>github</system>
+		<url>https://github.com/jonasrutishauser/${root.artifactId}/actions</url>
 	</ciManagement>
 
 	<distributionManagement>
@@ -67,12 +67,13 @@
 
 		<site.path>/snapshot</site.path>
 
+		<project.scm.id>github</project.scm.id>
+
 		<!-- properties due to MNG-3244 -->
 		<root.artifactId>${project.artifactId}</root.artifactId>
 		<scm.connection>scm:git:https://github.com/jonasrutishauser/${root.artifactId}.git</scm.connection>
 		<scm.developerConnection>scm:git:https://github.com/jonasrutishauser/${root.artifactId}.git</scm.developerConnection>
 		<scm_url>https://github.com/jonasrutishauser/${root.artifactId}</scm_url>
-		<project.scm.id>github</project.scm.id>
 		<distributionManagement.site.url>git://${root.artifactId}/https://github.com/jonasrutishauser/${root.artifactId}.git!gh-pages!${site.path}</distributionManagement.site.url>
 		<url>https://jonasrutishauser.github.io/${root.artifactId}${site.path}</url>
 
