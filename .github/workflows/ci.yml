@@ -17,6 +17,7 @@ jobs:
           - 1.8
           - 11
     steps:
+      - uses: actions/checkout@v2
       - uses: ./.github/actions/maven-ci
         with:
           java-version: ${{ matrix.java }}
