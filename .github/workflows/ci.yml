@@ -18,10 +18,22 @@ jobs:
           - 11
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/actions/maven-ci
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java }}
-          coverage: false
-          sonar: false
-          site: ${{ matrix.java == '1.8' }}
-
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ matrix.java }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2-${{ matrix.java }} ${{ runner.os }}-m2
+      - name: Setup Git
+        run: mkdir -p ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts && git config --global user.email "actions@github.com" && git config --global user.name "GitHub Actions"
+      - name: Build with Maven
+        run: mvn -B -V -e verify
+      - name: Deploy Site
+        if: ${{ matrix.java == '1.8' }}
+        run: mvn -B -e site-deploy
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
