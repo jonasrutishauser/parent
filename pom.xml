@@ -91,6 +91,7 @@
 		<plugin.jar.version>3.2.0</plugin.jar.version>
 		<plugin.javadoc.version>3.2.0</plugin.javadoc.version>
 		<plugin.jxr.version>3.0.0</plugin.jxr.version>
+		<plugin.nexus-staging.version>1.6.8</plugin.nexus-staging.version>
 		<plugin.plugin.version>3.6.0</plugin.plugin.version>
 		<plugin.project-info-reports.version>3.1.1</plugin.project-info-reports.version>
 		<plugin.release.version>2.5.3</plugin.release.version>
@@ -187,6 +188,17 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>${plugin.nexus-staging.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>false</autoReleaseAfterClose>
+				</configuration>
 			</plugin>
 		</plugins>
 		<pluginManagement>
