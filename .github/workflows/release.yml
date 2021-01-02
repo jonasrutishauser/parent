@@ -1,6 +1,12 @@
 name: Maven Release
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      release-body:
+        description: 'Text describing the contents of the release.'
+        required: false
+        default: ''
 
 jobs:
   release:
@@ -36,5 +42,6 @@ jobs:
         with:
           tag_name: v${{ steps.release.outputs.RELEASED_VERSION }}
           release_name: Parent ${{ steps.release.outputs.RELEASED_VERSION }}
+          body: ${{ github.event.inputs.release-body }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
