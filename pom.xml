@@ -3,7 +3,7 @@
 
 	<groupId>com.github.jonasrutishauser</groupId>
 	<artifactId>parent</artifactId>
-	<version>16</version>
+	<version>17-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Parent</name>
@@ -30,7 +30,7 @@
 		<connection>${scm.connection}</connection>
 		<developerConnection>${scm.developerConnection}</developerConnection>
 		<url>${scm_url}</url>
-		<tag>v16</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<issueManagement>
