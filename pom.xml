@@ -95,8 +95,8 @@
 		<plugin.plugin.version>3.6.4</plugin.plugin.version>
 		<plugin.project-info-reports.version>3.4.0</plugin.project-info-reports.version>
 		<plugin.release.version>2.5.3</plugin.release.version>
-		<plugin.resources.version>3.2.0</plugin.resources.version>
-		<plugin.site.version>3.12.0</plugin.site.version>
+		<plugin.resources.version>3.3.0</plugin.resources.version>
+		<plugin.site.version>3.12.1</plugin.site.version>
 		<plugin.source.version>3.2.1</plugin.source.version>
 		<plugin.surefire.version>2.22.2</plugin.surefire.version>
 		<plugin.taglist.version>3.0.0</plugin.taglist.version>
@@ -250,6 +250,14 @@
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>${plugin.jar.version}</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							</manifest>
+						</archive>
+					</configuration>
 				</plugin>
 				<plugin>
 					<artifactId>maven-install-plugin</artifactId>
