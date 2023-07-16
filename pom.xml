@@ -77,30 +77,30 @@
 		<distributionManagement.site.url>git://${root.artifactId}/https://github.com/jonasrutishauser/${root.artifactId}.git!gh-pages!${site.path}</distributionManagement.site.url>
 		<url>https://jonasrutishauser.github.io/${root.artifactId}${site.path}</url>
 
-		<plugin.assembly.version>3.4.2</plugin.assembly.version>
+		<plugin.assembly.version>3.6.0</plugin.assembly.version>
 		<plugin.changes.version>2.12.1</plugin.changes.version>
 		<plugin.changelog.version>2.3</plugin.changelog.version>
-		<plugin.clean.version>3.2.0</plugin.clean.version>
-		<plugin.compiler.version>3.10.1</plugin.compiler.version>
-		<plugin.dependency.version>3.3.0</plugin.dependency.version>
-		<plugin.deploy.version>3.0.0</plugin.deploy.version>
-		<plugin.enforcer.version>3.1.0</plugin.enforcer.version>
-		<plugin.gpg.version>3.0.1</plugin.gpg.version>
-		<plugin.install.version>3.0.1</plugin.install.version>
-		<plugin.jacoco.version>0.8.8</plugin.jacoco.version>
-		<plugin.jar.version>3.2.2</plugin.jar.version>
-		<plugin.javadoc.version>3.4.0</plugin.javadoc.version>
-		<plugin.jxr.version>3.2.0</plugin.jxr.version>
+		<plugin.clean.version>3.3.1</plugin.clean.version>
+		<plugin.compiler.version>3.11.0</plugin.compiler.version>
+		<plugin.dependency.version>3.6.0</plugin.dependency.version>
+		<plugin.deploy.version>3.1.1</plugin.deploy.version>
+		<plugin.enforcer.version>3.3.0</plugin.enforcer.version>
+		<plugin.gpg.version>3.1.0</plugin.gpg.version>
+		<plugin.install.version>3.1.1</plugin.install.version>
+		<plugin.jacoco.version>0.8.10</plugin.jacoco.version>
+		<plugin.jar.version>3.3.0</plugin.jar.version>
+		<plugin.javadoc.version>3.5.0</plugin.javadoc.version>
+		<plugin.jxr.version>3.3.0</plugin.jxr.version>
 		<plugin.nexus-staging.version>1.6.13</plugin.nexus-staging.version>
-		<plugin.plugin.version>3.6.4</plugin.plugin.version>
-		<plugin.project-info-reports.version>3.4.0</plugin.project-info-reports.version>
-		<plugin.release.version>2.5.3</plugin.release.version>
-		<plugin.resources.version>3.3.0</plugin.resources.version>
+		<plugin.plugin.version>3.9.0</plugin.plugin.version>
+		<plugin.project-info-reports.version>3.4.5</plugin.project-info-reports.version>
+		<plugin.release.version>3.0.1</plugin.release.version>
+		<plugin.resources.version>3.3.1</plugin.resources.version>
 		<plugin.site.version>3.12.1</plugin.site.version>
-		<plugin.source.version>3.2.1</plugin.source.version>
-		<plugin.surefire.version>2.22.2</plugin.surefire.version>
+		<plugin.source.version>3.3.0</plugin.source.version>
+		<plugin.surefire.version>3.1.2</plugin.surefire.version>
 		<plugin.taglist.version>3.0.0</plugin.taglist.version>
-		<plugin.versions.version>2.11.0</plugin.versions.version>
+		<plugin.versions.version>2.16.0</plugin.versions.version>
 		<wagon.git.version>1.1.1</wagon.git.version>
 	</properties>
 
