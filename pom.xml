@@ -302,6 +302,7 @@
 						<useReleaseProfile>false</useReleaseProfile>
 						<releaseProfiles>release</releaseProfiles>
 						<tagNameFormat>v@{project.version}</tagNameFormat>
+						<goals>deploy release:clean site-deploy</goals><!-- run site lifecycle separatly -->
 					</configuration>
 				</plugin>
 				<plugin>
