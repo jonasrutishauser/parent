@@ -111,10 +111,26 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>prepare-surefire</id>
 						<goals>
 							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>prepare-failsafe</id>
+						<goals>
 							<goal>prepare-agent-integration</goal>
 						</goals>
+						<configuration>
+							<append>true</append>
+							<destFile>${maven.multiModuleProjectDirectory}/target/jacoco-it.exec</destFile>
+						</configuration>
+					</execution>
+					<execution>
+						<id>report-integration</id>
+						<configuration>
+							<dataFile>${maven.multiModuleProjectDirectory}/target/jacoco-it.exec</dataFile>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -363,6 +379,14 @@
 				<configuration>
 					<alwaysGenerateSurefireReport>false</alwaysGenerateSurefireReport>
 				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report-only</report>
+							<report>failsafe-report-only</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 			<plugin>
 				<artifactId>maven-jxr-plugin</artifactId>
@@ -419,10 +443,19 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<reportSets>
 					<reportSet>
+						<id>report</id>
 						<reports>
 							<report>report</report>
+						</reports>
+					</reportSet>
+					<reportSet>
+						<id>report-integration</id>
+						<reports>
 							<report>report-integration</report>
 						</reports>
+						<configuration>
+							<dataFile>${maven.multiModuleProjectDirectory}/target/jacoco-it.exec</dataFile>
+						</configuration>
 					</reportSet>
 				</reportSets>
 			</plugin>
