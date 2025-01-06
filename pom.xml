@@ -72,6 +72,8 @@
 
 		<plugin.assembly.version>3.7.1</plugin.assembly.version>
 		<plugin.central-publishing.version>0.6.0</plugin.central-publishing.version>
+		<plugin.changes.version>3.0.0-M2</plugin.changes.version>
+		<plugin.changelog.version>3.0.0-M1</plugin.changelog.version>
 		<plugin.clean.version>3.4.0</plugin.clean.version>
 		<plugin.compiler.version>3.13.0</plugin.compiler.version>
 		<plugin.dependency.version>3.8.1</plugin.dependency.version>
@@ -309,6 +311,14 @@
 					<version>${plugin.enforcer.version}</version>
 				</plugin>
 				<plugin>
+					<artifactId>maven-changes-plugin</artifactId>
+					<version>${plugin.changes.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-changelog-plugin</artifactId>
+					<version>${plugin.changelog.version}</version>
+				</plugin>
+				<plugin>
 					<artifactId>maven-jxr-plugin</artifactId>
 					<version>${plugin.jxr.version}</version>
 				</plugin>
@@ -450,6 +460,29 @@
 						</configuration>
 					</reportSet>
 				</reportSets>
+			</plugin>
+			<plugin>
+				<artifactId>maven-changes-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>github-changes</report>
+						</reports>
+						<configuration>
+							<includeOpenIssues>false</includeOpenIssues>
+							<runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
+						</configuration>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<artifactId>maven-changelog-plugin</artifactId>
+				<configuration>
+					<displayFileDetailUrl>${project.scm.url}/blob/master/%FILE%</displayFileDetailUrl>
+					<displayChangeSetDetailUrl>${project.scm.url}/commit/</displayChangeSetDetailUrl>
+					<displayFileRevDetailUrl>${project.scm.url}/blob/%REV%/%FILE%</displayFileRevDetailUrl>
+					<range>365</range>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
