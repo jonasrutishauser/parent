@@ -224,6 +224,7 @@
 						</dependency>
 					</dependencies>
 					<configuration>
+						<redirectTestOutputToFile>true</redirectTestOutputToFile>
 						<reportFormat>plain</reportFormat>
 						<statelessTestsetReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
 							<usePhrasedTestCaseMethodName>true</usePhrasedTestCaseMethodName>
@@ -258,6 +259,7 @@
 						</dependency>
 					</dependencies>
 					<configuration>
+						<redirectTestOutputToFile>true</redirectTestOutputToFile>
 						<reportFormat>plain</reportFormat>
 						<statelessTestsetReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
 							<usePhrasedTestCaseMethodName>true</usePhrasedTestCaseMethodName>
