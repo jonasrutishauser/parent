@@ -15,6 +15,7 @@ jobs:
   build:
     uses: ./.github/workflows/common-ci.yml
     with:
+      codeql: false # contains no code
       deploy-site: ${{ github.event_name == 'push' }}
       publish-test-report: false
       publish-coverage-report: false
