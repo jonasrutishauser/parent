@@ -124,7 +124,7 @@ jobs:
       - name: Sonar Report
         if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.sonar-report }}
         run: >
-          mvn -B -e -Dstyle.color=always jacoco:report jacoco:report-integration@report-integration sonar:sonar -Dsonar.organization=jonasrutishauser-github
+          mvn -B -e -Dstyle.color=always jacoco:report jacoco:report-integration@report-integration org.sonarsource.scanner.maven:sonar-maven-plugin:5.1.0.4751:sonar -Dsonar.organization=jonasrutishauser-github
         env:
           GITHUB_PULL_REQUEST: ${{ github.event.number }}
           GITHUB_TOKEN: ${{ github.token }}
