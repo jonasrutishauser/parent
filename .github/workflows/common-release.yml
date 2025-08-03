@@ -52,6 +52,10 @@ jobs:
                       <password>${env.GITHUB_TOKEN}</password>
                     </server>
                     <server>
+                      <id>gpg.passphrase</id>
+                      <passphrase>${env.MAVEN_GPG_PASSPHRASE}</passphrase>
+                    </server>
+                    <server>
                       <id>sonatype-central-portal</id>
                       <username>${env.MAVEN_USERNAME}</username>
                       <password>${env.MAVEN_PASSWORD}</password>
