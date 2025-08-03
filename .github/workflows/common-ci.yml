@@ -63,6 +63,8 @@ jobs:
         java: ${{ fromJson(inputs.java-versions) }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis with sonarqube
       - name: Initialize CodeQL
         if: ${{ inputs.codeql && matrix.java == fromJson(inputs.java-versions)[0] }}
         uses: github/codeql-action/init@v3
@@ -73,7 +75,19 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: ${{ matrix.java }}
-          cache: 'maven'
+      - name: Cache SonarQube packages
+        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.sonar-report }}
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
       - name: Setup Git
         if: ${{ inputs.deploy-site && matrix.java == fromJson(inputs.java-versions)[0] }}
         run: >
