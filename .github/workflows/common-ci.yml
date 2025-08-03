@@ -1,0 +1,134 @@
+name: Maven CI
+
+on:
+  workflow_call:
+    inputs:
+      java-versions:
+        description: 'Java versions to test against'
+        required: false
+        type: string
+        default: '["8", "11", "17", "21", "24"]'
+      deploy-site:
+        description: 'Whether to deploy the site'
+        required: false
+        type: boolean
+        default: false
+      publish-test-report:
+        description: 'Whether to publish the test report'
+        required: false
+        type: boolean
+        default: true
+      publish-coverage-report:
+        description: 'Whether to publish the coverage report'
+        required: false
+        type: boolean
+        default: false
+      store-logs-path:
+        description: 'Path to logs to store if build fails'
+        required: false
+        type: string
+        default: ''
+      sonar-report:
+        description: 'Whether to generate a SonarQube report'
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      CODECOV_TOKEN:
+        description: 'Codecov token for coverage reporting'
+        required: false
+      SONAR_TOKEN:
+        description: 'SonarQube token for SonarQube reporting'
+        required: false
+
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  checks: write
+  security-events: write
+  contents: write
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java: ${{ fromJson(inputs.java-versions) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Initialize CodeQL
+        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] }}
+        uses: github/codeql-action/init@v3
+        with:
+          languages: java
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: ${{ matrix.java }}
+          cache: 'maven'
+      - name: Setup Git
+        if: ${{ inputs.deploy-site }}
+        run: >
+          git config --global user.email "actions@github.com" && 
+          git config --global user.name "GitHub Actions"
+      - name: Build with Maven
+        run: mvn -B -V -e -Dstyle.color=always clean verify
+      - name: Upload logfiles
+        if: ${{ failure() && inputs.store-logs-path != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs
+          path: ${{ inputs.store-logs-path }}
+          retention-days: 5
+      - name: Publish Test Report
+        if: ${{ !cancelled() && matrix.java == fromJson(inputs.java-versions)[0] && inputs.publish-test-report }}
+        uses: scacap/action-surefire-report@v1
+        with:
+          report_paths: "**/target/*-reports/TEST-*.xml"
+      - name: Unittest Coverage
+        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.publish-coverage-report }}
+        run: >
+          mvn -B -Dstyle.color=always jacoco:report
+      - name: Unittest Codecov
+        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.publish-coverage-report }}
+        uses: codecov/codecov-action@v4
+        with:
+          flags: unittests
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Integrationstest Coverage
+        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.publish-coverage-report }}
+        run: >
+          mvn -B -Dstyle.color=always jacoco:report-integration@report-integration
+      - name: Integrationstest Codecov
+        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.publish-coverage-report }}
+        uses: codecov/codecov-action@v4
+        with:
+          flags: integration
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload test results to Codecov
+        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.publish-coverage-report }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Perform CodeQL Analysis
+        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] }}
+        uses: github/codeql-action/analyze@v3
+      - name: Sonar Report
+        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.sonar-report }}
+        run: >
+          mvn -B -e -Dstyle.color=always jacoco:report jacoco:report-integration@report-integration sonar:sonar -Dsonar.organization=jonasrutishauser-github
+        env:
+          GITHUB_PULL_REQUEST: ${{ github.event.number }}
+          GITHUB_TOKEN: ${{ github.token }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+      - name: Deploy Site
+        if: ${{ inputs.deploy-site && matrix.java == fromJson(inputs.java-versions)[0] }}
+        run: mvn -B -e -Dstyle.color=always site-deploy
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

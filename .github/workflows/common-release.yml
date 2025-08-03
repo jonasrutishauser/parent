@@ -1,0 +1,88 @@
+name: Maven Release
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        description: 'Name of the release.'
+        required: true
+        type: string
+      java-version:
+        description: 'Java version to use for the release.'
+        required: false
+        type: string
+        default: '8'
+      release-body:
+        description: 'Text describing the contents of the release.'
+        required: false
+        type: string
+    secrets:
+      MAVEN_GPG_PRIVATE_KEY:
+        description: 'Private GPG key for signing the release.'
+        required: true
+      MAVEN_GPG_PASSPHRASE:
+        description: 'Passphrase for the GPG key.'
+        required: true
+      CENTRAL_USERNAME:
+        description: 'Username for Maven Central.'
+        required: true
+      CENTRAL_TOKEN:
+        description: 'Token for Maven Central.'
+        required: true
+
+jobs:
+  release:
+    name: Release to Maven Central
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: ${{ inputs.java-version }}
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+      - name: Setup Git
+        run: >
+          git config --global user.email "actions@github.com" && 
+          git config --global user.name "GitHub Actions" && 
+          echo '<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+                  <servers>
+                    <server>
+                      <id>github</id>
+                      <username>${env.GITHUB_ACTOR}</username>
+                      <password>${env.GITHUB_TOKEN}</password>
+                    </server>
+                    <server>
+                      <id>sonatype-central-portal</id>
+                      <username>${env.MAVEN_USERNAME}</username>
+                      <password>${env.MAVEN_PASSWORD}</password>
+                      <configuration>
+                        <njord.publisher>sonatype-cp</njord.publisher>
+                        <njord.releaseUrl>njord:template:release-sca</njord.releaseUrl>
+                      </configuration>
+                    </server>
+                  </servers>
+                </settings>' > $GITHUB_WORKSPACE/maven-settings.xml
+      - name: Prepare Release
+        run: mvn -V -s $GITHUB_WORKSPACE/maven-settings.xml -B -e -Dstyle.color=always release:clean release:prepare
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Release
+        run: >
+          echo "RELEASED_VERSION=$(grep scm.tag= release.properties | cut -d'=' -f2 | cut -c2-)" >> $GITHUB_OUTPUT && 
+          mvn -s $GITHUB_WORKSPACE/maven-settings.xml -B -e -Dstyle.color=always release:perform
+        env:
+          MAVEN_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
+        id: release
+      - name: Create Release Entry
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.release.outputs.RELEASED_VERSION }}
+          name: ${{ inputs.name }} ${{ steps.release.outputs.RELEASED_VERSION }}
+          body: ${{ inputs.release-body }}
+          token: ${{ github.token }}
