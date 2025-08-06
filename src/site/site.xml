@@ -11,7 +11,7 @@
 			<item name="Maven" href="https://maven.apache.org/" />
 		</links>
 		<breadcrumbs>
-			<item name="Parent" href="." />
+			<item name="Parent" href="${url}" />
 		</breadcrumbs>
 		<menu ref="parent" inherit="top" />
 		<menu ref="modules" inherit="bottom" />
@@ -27,7 +27,7 @@
 	<custom>
 		<fluidoSkin>
 			<gitHub>
-				<projectId>jonasrutishauser/${project.artifactId}</projectId>
+				<projectId>jonasrutishauser/./${root.artifactId}</projectId>
 				<ribbonOrientation>right-top</ribbonOrientation>
 				<ribbonColor>gray</ribbonColor>
 			</gitHub>

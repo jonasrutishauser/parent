@@ -204,6 +204,34 @@
 						<goals>
 							<goal>attach-descriptor</goal>
 						</goals>
+						<configuration>
+							<siteDirectory>${project.build.directory}/generated-site</siteDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<inherited>false</inherited>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>prepare-package</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/generated-site</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/site</directory>
+									<includes>
+										<include>site.xml</include>
+									</includes>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+							<escapeString>./</escapeString>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
