@@ -104,6 +104,8 @@
 		<plugin.taglist.version>3.2.1</plugin.taglist.version>
 		<plugin.versions.version>2.18.0</plugin.versions.version>
 		<wagon.git.version>1.1.1</wagon.git.version>
+
+		<njord.publisher.sonatype-cp.publishingType>AUTOMATIC</njord.publisher.sonatype-cp.publishingType>
 	</properties>
 
 	<build>
