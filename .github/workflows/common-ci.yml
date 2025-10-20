@@ -5,7 +5,7 @@ on:
         description: 'Java versions to test against'
         required: false
         type: string
-        default: '["8", "11", "17", "21", "24"]'
+        default: '["8", "11", "17", "21", "25"]'
       codeql:
         description: 'Whether to enable CodeQL analysis'
         required: false

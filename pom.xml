@@ -82,27 +82,27 @@
 		<plugin.changes.version>3.0.0-M3</plugin.changes.version>
 		<plugin.changelog.version>3.0.0-M1</plugin.changelog.version>
 		<plugin.clean.version>3.5.0</plugin.clean.version>
-		<plugin.compiler.version>3.14.0</plugin.compiler.version>
-		<plugin.dependency.version>3.8.1</plugin.dependency.version>
+		<plugin.compiler.version>3.14.1</plugin.compiler.version>
+		<plugin.dependency.version>3.9.0</plugin.dependency.version>
 		<plugin.deploy.version>3.1.4</plugin.deploy.version>
-		<plugin.enforcer.version>3.6.1</plugin.enforcer.version>
+		<plugin.enforcer.version>3.6.2</plugin.enforcer.version>
 		<plugin.gpg.version>3.2.8</plugin.gpg.version>
 		<plugin.install.version>3.1.4</plugin.install.version>
-		<plugin.jacoco.version>0.8.13</plugin.jacoco.version>
+		<plugin.jacoco.version>0.8.14</plugin.jacoco.version>
 		<plugin.jar.version>3.4.2</plugin.jar.version>
-		<plugin.javadoc.version>3.11.2</plugin.javadoc.version>
+		<plugin.javadoc.version>3.12.0</plugin.javadoc.version>
 		<plugin.jxr.version>3.6.0</plugin.jxr.version>
-		<plugin.njord.version>0.8.3</plugin.njord.version>
+		<plugin.njord.version>0.8.5</plugin.njord.version>
 		<plugin.plugin.version>3.15.1</plugin.plugin.version>
 		<plugin.project-info-reports.version>3.9.0</plugin.project-info-reports.version>
 		<plugin.release.version>3.1.1</plugin.release.version>
 		<plugin.resources.version>3.3.1</plugin.resources.version>
 		<plugin.site.version>3.21.0</plugin.site.version>
 		<plugin.source.version>3.3.1</plugin.source.version>
-		<plugin.surefire.version>3.5.2</plugin.surefire.version>
-		<plugin.surefire-junit5-tree-reporter.version>1.4.0</plugin.surefire-junit5-tree-reporter.version>
+		<plugin.surefire.version>3.5.4</plugin.surefire.version>
+		<plugin.surefire-junit5-tree-reporter.version>1.5.1</plugin.surefire-junit5-tree-reporter.version>
 		<plugin.taglist.version>3.2.1</plugin.taglist.version>
-		<plugin.versions.version>2.18.0</plugin.versions.version>
+		<plugin.versions.version>2.19.1</plugin.versions.version>
 		<wagon.git.version>1.1.1</wagon.git.version>
 
 		<njord.publisher.sonatype-cp.publishingType>AUTOMATIC</njord.publisher.sonatype-cp.publishingType>
@@ -403,6 +403,14 @@
 				<plugin>
 					<artifactId>maven-changelog-plugin</artifactId>
 					<version>${plugin.changelog.version}</version>
+					<dependencies>
+						<!-- fix https://github.com/apache/maven-scm/issues/1310 -->
+						<dependency>
+							<groupId>org.apache.maven.scm</groupId>
+							<artifactId>maven-scm-provider-git-commons</artifactId>
+							<version>2.2.1</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 				<plugin>
 					<artifactId>maven-jxr-plugin</artifactId>
