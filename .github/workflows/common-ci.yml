@@ -67,7 +67,7 @@ jobs:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis with sonarqube
       - name: Initialize CodeQL
         if: ${{ inputs.codeql && matrix.java == fromJson(inputs.java-versions)[0] }}
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: java
       - name: Set up JDK ${{ matrix.java }}
@@ -129,12 +129,13 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Upload test results to Codecov
         if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.publish-coverage-report }}
-        uses: codecov/test-results-action@v1
+        uses: codecov/codecov-action@v5
         with:
+          report_type: test_results
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Perform CodeQL Analysis
         if: ${{ inputs.codeql && matrix.java == fromJson(inputs.java-versions)[0] }}
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
       - name: Sonar Report
         if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.sonar-report }}
         run: >
