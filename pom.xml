@@ -103,6 +103,7 @@
 		<plugin.surefire-junit5-tree-reporter.version>1.5.1</plugin.surefire-junit5-tree-reporter.version>
 		<plugin.taglist.version>3.2.2</plugin.taglist.version>
 		<plugin.versions.version>2.21.0</plugin.versions.version>
+		<plugin.war.version>3.5.1</plugin.war.version>
 		<wagon.git.version>1.1.1</wagon.git.version>
 
 		<njord.publisher.sonatype-cp.publishingType>AUTOMATIC</njord.publisher.sonatype-cp.publishingType>
@@ -449,6 +450,19 @@
 							<arg>--pinentry-mode</arg>
 							<arg>loopback</arg>
 						</gpgArguments>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${plugin.war.version}</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							</manifest>
+							<failOnMissingWebXml>false</failOnMissingWebXml>
+						</archive>
 					</configuration>
 				</plugin>
 			</plugins>
