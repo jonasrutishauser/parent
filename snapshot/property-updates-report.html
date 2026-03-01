@@ -32,7 +32,7 @@
       <li><a href="./">Parent</a><span class="divider">/</span></li>
     <li class="active">Property Updates Report</li>
         <li id="publishDate" class="pull-right"><span class="divider">|</span> Last Published: 2026-03-01</li>
-          <li id="projectVersion" class="pull-right"><span class="divider">|</span>Version: 38-SNAPSHOT</li>
+          <li id="projectVersion" class="pull-right"><span class="divider">|</span>Version: 39-SNAPSHOT</li>
         <li class="pull-right"><a href="https://maven.apache.org/">Maven</a></li>
           </ul>
         </div>
@@ -72,7 +72,7 @@
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td># of properties using the latest version available</td>
-<td>17</td></tr>
+<td>18</td></tr>
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td># of properties where the next version available is smaller than an incremental version update</td>
@@ -301,13 +301,21 @@
 <td></td></tr>
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
+<td>${plugin.war.version}</td>
+<td>3.5.1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td></tr>
+<tr class="b">
+<td><img src="images/icon_success_sml.gif" /></td>
 <td>${wagon.git.version}</td>
 <td>1.1.1</td>
 <td></td>
 <td></td>
 <td></td>
 <td></td></tr>
-<tr class="b">
+<tr class="a">
 <th>Status</th>
 <th>Property</th>
 <th>Current Version</th>
@@ -1057,6 +1065,35 @@
 <tr class="a">
 <th>Allowed version range</th>
 <td style="text-align: left;">2.21.0</td></tr>
+<tr class="b">
+<th>Infer associations from project</th>
+<td style="text-align: left;">Yes</td></tr>
+<tr class="a">
+<th>Only use release versions</th>
+<td style="text-align: left;">No</td></tr>
+<tr class="b">
+<th>Include projects from reactor</th>
+<td style="text-align: left;">Yes</td></tr>
+<tr class="a">
+<th>Always use reactor projects (even if older or -SNAPSHOT)</th>
+<td style="text-align: left;">Yes</td></tr></table></section><section><a id="a.24.7Bplugin.war.version.7D"></a>
+<h2>${plugin.war.version}</h2>
+<table class="table table-striped">
+<tr class="a">
+<th>Status</th>
+<td style="text-align: left;"><img src="images/icon_success_sml.gif" />&#160;No newer versions available.</td></tr>
+<tr class="b">
+<th>Property</th>
+<td style="text-align: left;">${plugin.war.version}</td></tr>
+<tr class="a">
+<th>Associated artifacts</th>
+<td style="text-align: left;">org.apache.maven.plugins:maven-war-plugin</td></tr>
+<tr class="b">
+<th>Current Version</th>
+<td style="text-align: left;">3.5.1</td></tr>
+<tr class="a">
+<th>Allowed version range</th>
+<td style="text-align: left;">3.5.1</td></tr>
 <tr class="b">
 <th>Infer associations from project</th>
 <td style="text-align: left;">Yes</td></tr>
