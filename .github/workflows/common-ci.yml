@@ -76,7 +76,7 @@ jobs:
           distribution: 'zulu'
           java-version: ${{ matrix.java }}
       - name: Cache SonarQube packages
-        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.sonar-report }}
+        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.sonar-report && !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
         uses: actions/cache@v6
         with:
           path: ~/.sonar/cache
@@ -138,7 +138,7 @@ jobs:
         if: ${{ inputs.codeql && matrix.java == fromJson(inputs.java-versions)[0] }}
         uses: github/codeql-action/analyze@v4
       - name: Sonar Report
-        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.sonar-report }}
+        if: ${{ matrix.java == fromJson(inputs.java-versions)[0] && inputs.sonar-report && !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
         run: >
           mvn -B -e -Dstyle.color=always jacoco:report jacoco:report-integration@report-integration org.sonarsource.scanner.maven:sonar-maven-plugin:5.7.0.6970:sonar -Dsonar.organization=jonasrutishauser-github
         env:
